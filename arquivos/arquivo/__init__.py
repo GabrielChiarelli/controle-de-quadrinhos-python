@@ -27,12 +27,14 @@ def lerArquivo(nome, txt):
         print(f'Erro ao ler o arquivo {nome}')
     else:
         cabecalho(txt)
-        indice = 1
+        indice = 0
         for linha in a:
             dict_original = str(linha)
             infos = eval(dict_original)
-            print(f"{indice:>4} - {infos['titulo']:<30}{infos['numero']:>3} ({infos['ano']}) | Quantidade: {infos['quantidade']} | ID: {infos['id']}")
             indice += 1
+            print(f"{indice:>4} - {infos['titulo']:<30}{'N°':>3}{infos['numero']:<4} ({infos['ano']}{')':<5} | Quantidade: {infos['quantidade']:>4} | ID: {infos['id']}")
+        if indice == 0:
+            print(f"{'Nenhum quadrinho cadastrado.':>32}")
     finally:
         a.close()
 
@@ -128,14 +130,31 @@ def buscarQuadrinho(arquivo, palavra_chave):
     except:
         print(f'Erro ao ler o arquivo {arquivo}')
     else:
-        indice = 1
+        indice = 0
+        quadrinhos_encontrados = 0
+
         for linha in arq:
             dict_original = str(linha)
             infos = eval(dict_original)
 
             if palavra_chave in infos['titulo']:
-                print(f"{indice:>4} - {infos['titulo']:<30}{infos['numero']:>3} ({infos['ano']}) | Quantidade: {infos['quantidade']} | ID: {infos['id']}")
+                quadrinhos_encontrados += 1
+
+        if quadrinhos_encontrados == 1:
+            cabecalho(f'Foi encontrado 1 quadrinho com o título: {palavra_chave}')
+        elif quadrinhos_encontrados >= 2:
+            cabecalho(f'Foram encontrados {quadrinhos_encontrados} quadrinhos com o título: {palavra_chave}')
+        else:
+            cabecalho(f'Nenhum quadrinho encontrado com o título: {palavra_chave}')
+
+        arq.seek(0)
+
+        for linha in arq:
+            dict_original = str(linha)
+            infos = eval(dict_original)
+            if palavra_chave in infos['titulo']:
                 indice += 1
+                print(f"{indice:>4} - {infos['titulo']:<30}{'N°':>3}{infos['numero']:<4} ({infos['ano']}{')':<5} | Quantidade: {infos['quantidade']:>4} | ID: {infos['id']}")
     finally:
         arq.close()
 

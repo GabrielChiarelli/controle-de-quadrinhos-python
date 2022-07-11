@@ -12,13 +12,13 @@ def leiaInt(msg):
             return num
 
 
-def linha(tamanho=52):
+def linha(tamanho=100):
     return ('-' * tamanho)
 
 
 def cabecalho(txt):
     print(linha())
-    print(txt.center(52))
+    print(txt.center(100))
     print(linha())
 
 

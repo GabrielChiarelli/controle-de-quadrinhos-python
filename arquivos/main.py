@@ -30,7 +30,7 @@ while True:
         cabecalho('''\nAcredito que a melhor maneira de se aprender algo é aplicando o conhecimneto em algo que se ama.
                   \nEntão criei esse programa para colocar em prática os meus conhecimentos de Python e também para organizar a minha coleção de Quadrinhos!
                   \nEspero que goste :)
-                  \nControle de Quadrinhos - V1.1 - 11/07/2022 - Desenvolvido por Gabriel Chiarelli''')
+                  \nControle de Quadrinhos - V1.1 - 11/07/2022 - Desenvolvido por Gabriel Chiarelli\n''')
     elif resposta == 6:
         cabecalho('Saindo do sistema... Obrigado pela preferência :)')
         break
