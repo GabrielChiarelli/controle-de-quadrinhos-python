@@ -27,22 +27,17 @@ def lerArquivo(nome, txt):
         print(f'Erro ao ler o arquivo {nome}')
     else:
         cabecalho(txt)
-        # print(f'{"Título":>12}{"Número":>32}     id')
         indice = 1
         for linha in a:
-        #    dado = linha.split(';')
-        #    dado[1] = dado[1].replace('\n', '')
-        #    dado[2] = dado[2].replace('\n', '')
-        #    print(f'{indice} - {dado[0]:<30}{dado[1]:>3} ({dado[2]}) id: {dado[3]}')
             dict_original = str(linha)
             infos = eval(dict_original)
-            print(f"{indice:>4} - {infos['titulo']:<30}{infos['numero']:>3} ({infos['ano']}) id: {infos['id']} quantidade: {infos['quantidade']}")
+            print(f"{indice:>4} - {infos['titulo']:<30}{infos['numero']:>3} ({infos['ano']}) | Quantidade: {infos['quantidade']} | ID: {infos['id']}")
             indice += 1
     finally:
         a.close()
 
 
-def cadastrar(arquivo, titulo='desconhecido', numero=0, ano=0000, quantidade = 1):
+def cadastrar(arquivo, titulo='desconhecido', numero=0, ano=0000, quantidade=1):
     try:
         a = open(arquivo, 'at')
     except:
@@ -54,12 +49,11 @@ def cadastrar(arquivo, titulo='desconhecido', numero=0, ano=0000, quantidade = 1
                 linhas = arq.readlines()
 
             # escreve uma nova linha com: TÍTULO do quadrinho - NÚMERO da edição - ANO DE LANÇAMENTO - ID de cadastro
-            # a.write(f'{titulo};{numero};{ano};{len(linhas) + 1}\n')
             dict = {}
             dict['titulo'] = titulo
             dict['numero'] = numero
             dict['ano'] = ano
-            #dict['id'] = len(linhas) + 1
+            dict['quantidade'] = quantidade
             ultimo_id = 0
             with open(arquivo, 'rt') as arq:
                 linhas = arq.readlines()
@@ -67,7 +61,6 @@ def cadastrar(arquivo, titulo='desconhecido', numero=0, ano=0000, quantidade = 1
                     nova_linha = eval(linha)
                     ultimo_id = nova_linha['id']
             dict['id'] = ultimo_id + 1
-            dict['quantidade'] = quantidade
             a.write(str(dict))
             a.write('\n')
         except:
@@ -104,10 +97,10 @@ def removerQuadrinho(arquivo):
                     print(f"Quadrinho {quadrinho} deletado com sucesso.")
             else:
                 quantidade_desejada = int(input('Deseja remover quantas edições? '))
-                while quantidade_desejada > int(infos['quantidade']) or quantidade_desejada < int(infos['quantidade']):
+                while quantidade_desejada > int(infos['quantidade']) or quantidade_desejada <= 0:
                     if quantidade_desejada > int(infos['quantidade']):
                         quantidade_desejada = int(input('Quantidade desejada superior a quantidade atual. Por favor, digite um número menor: '))
-                    elif quantidade_desejada < int(infos['quantidade']):
+                    elif quantidade_desejada <= 0:
                         quantidade_desejada = int(input(
                             'Quantidade desejada inferior a quantidade atual. Por favor, escolha uma quantidade maior: '))
                 if quantidade_desejada == infos['quantidade']:
@@ -127,6 +120,26 @@ def removerQuadrinho(arquivo):
                     a = open(arquivo, 'w')
                     a.writelines(list_of_lines)
                     a.close()
+
+
+def buscarQuadrinho(arquivo, palavra_chave):
+    try:
+        arq = open(arquivo, 'rt')
+    except:
+        print(f'Erro ao ler o arquivo {arquivo}')
+    else:
+        indice = 1
+        for linha in arq:
+            dict_original = str(linha)
+            infos = eval(dict_original)
+
+            if palavra_chave in infos['titulo']:
+                print(f"{indice:>4} - {infos['titulo']:<30}{infos['numero']:>3} ({infos['ano']}) | Quantidade: {infos['quantidade']} | ID: {infos['id']}")
+                indice += 1
+    finally:
+        arq.close()
+
+
 
 
 

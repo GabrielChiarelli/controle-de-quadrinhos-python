@@ -3,7 +3,7 @@ def leiaInt(msg):
         try:
             num = int(input(msg))
         except (ValueError, TypeError):
-            print('ERRO: Por favor, digite uma opção válida: )')
+            print('ERRO: Por favor, digite um número válido: )')
             continue
         except KeyboardInterrupt:
             print('Nenhuma opção escolhida.')
@@ -32,6 +32,5 @@ def menu(lista):
 
     print(linha())
     opc = leiaInt('Sua Opção: ')
-    #opc = int(input('Sua Opção: '))
     return opc
 
