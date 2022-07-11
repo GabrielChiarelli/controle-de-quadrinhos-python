@@ -1,4 +1,4 @@
-<h1>Controle de Quadrinhos feito em Python</h1>
+<h1>Controle de Quadrinhos feito em Python v1.0</h1>
  Sempre acreditei que o melhor jeito de se aprender algo é aplicando o conhecimento em algo que se ama. Então criei esse programa para treinar Python e organizar minha Coleção de Quadrinhos!
  <br>
  É um programa bem simples e intuitivo, e roda direto no seu prompt de comando (cmd).
