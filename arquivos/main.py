@@ -12,7 +12,7 @@ while True:
         lerArquivo(arquivo, 'QUADRINHOS CADASTRADOS')
     elif resposta == 2:
         cabecalho('NOVO CADASTRO')
-        titulo = str(input('Título: '))
+        titulo = str(input('Título: ')).strip()
         numero = leiaInt('Número: ')
         ano = leiaInt('Ano de Lançamento: ')
         quantidade = leiaInt('Quantidade de edições: ')
@@ -27,10 +27,12 @@ while True:
     elif resposta == 4:
         removerQuadrinho(arquivo)
     elif resposta == 5:
-        cabecalho('''\nAcredito que a melhor maneira de se aprender algo é aplicando o conhecimneto em algo que se ama.
-                  \nEntão criei esse programa para colocar em prática os meus conhecimentos de Python e também para organizar a minha coleção de Quadrinhos!
-                  \nEspero que goste :)
-                  \nControle de Quadrinhos - V1.1 - 11/07/2022 - Desenvolvido por Gabriel Chiarelli\n''')
+        cabecalho('''Seja muito bem-vindo ao "Controle de Quadrinhos em Python".
+Este programa te permite listar todos os seus Quadrinhos, incluindo seus títulos, números, ano de lançamento e quantidade de edições.
+Você também pode deletar quadrinhos que não possui mais, e pesquisar por um título específico!
+Espero que ele lhe divirta e lhe ajude com sua Coleção!
+Muito obrigado e abraços :) 
+v1.2 (15/07/2022) - Desenvolvido por Gabriel Chiarelli\n''')
     elif resposta == 6:
         cabecalho('Saindo do sistema... Obrigado pela preferência :)')
         break
@@ -38,5 +40,6 @@ while True:
         print('Digite uma opção válida!')
 
 
+# Controle de Quadrinhos - v1.2 - 15/07/2022 - Desenvolvido por Gabriel Chiarelli :)
 # Controle de Quadrinhos - V1.1 - 11/07/2022 - Desenvolvido por Gabriel Chiarelli :)
 # Controle de Quadrinhos - V1.0 - 01/07/2022 - Desenvolvido por Gabriel Chiarelli :)

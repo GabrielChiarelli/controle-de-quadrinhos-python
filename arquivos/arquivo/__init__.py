@@ -80,7 +80,7 @@ def removerQuadrinho(arquivo):
 
         dict_original = str(linhas[linha_desejada - 1])
         infos = eval(dict_original)
-        resposta = str(input(f"Deseja deletar o quadriho {infos['titulo']} {infos['numero']}? [S/N] ")).strip().upper()
+        resposta = str(input(f"Deseja deletar o quadrinho {infos['titulo']} {infos['numero']}? [S/N] ")).strip().upper()
 
         while resposta not in 'SN':
             resposta = str(input('Respota inválida. Por favor, coloque S ou N: ')).strip().upper()
@@ -115,7 +115,6 @@ def removerQuadrinho(arquivo):
                     print(f"Deletando {quantidade_desejada} edições do quadrinho {quadrinho}")
                     a = open(arquivo, 'r')
                     list_of_lines = a.readlines()
-                    info_antiga = list_of_lines[linha_desejada - 1]
                     nova_info = {'titulo': infos['titulo'], 'numero': infos['numero'], 'ano': infos['ano'], 'id': infos['id'], 'quantidade': infos['quantidade'] - quantidade_desejada}
                     # sobreescrever toda a linha, com a nova quantidade
                     list_of_lines[linha_desejada - 1] = str(nova_info)
@@ -132,12 +131,14 @@ def buscarQuadrinho(arquivo, palavra_chave):
     else:
         indice = 0
         quadrinhos_encontrados = 0
+        palavra_chave_maiuscula = str(palavra_chave).upper()
+        palavra_chave_sem_hifen = palavra_chave_maiuscula.replace('-', ' ')
 
         for linha in arq:
             dict_original = str(linha)
             infos = eval(dict_original)
 
-            if palavra_chave in infos['titulo']:
+            if palavra_chave_sem_hifen in str(infos['titulo']).upper().replace('-', ' '):
                 quadrinhos_encontrados += 1
 
         if quadrinhos_encontrados == 1:
@@ -152,9 +153,11 @@ def buscarQuadrinho(arquivo, palavra_chave):
         for linha in arq:
             dict_original = str(linha)
             infos = eval(dict_original)
-            if palavra_chave in infos['titulo']:
+
+            if palavra_chave_sem_hifen in str(infos['titulo']).upper().replace('-', ' '):
                 indice += 1
                 print(f"{indice:>4} - {infos['titulo']:<30}{'N°':>3}{infos['numero']:<4} ({infos['ano']}{')':<5} | Quantidade: {infos['quantidade']:>4} | ID: {infos['id']}")
+
     finally:
         arq.close()
 
